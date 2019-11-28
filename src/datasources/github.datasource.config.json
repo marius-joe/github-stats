@@ -1,0 +1,11 @@
+{
+    "name": "github",
+    "connector": "rest",
+    "baseURL": "https://api.github.com",
+    "options": {
+        "headers": {
+            "accept": "application/vnd.github.v3+json"
+        }
+    },
+    "crud": false
+}
