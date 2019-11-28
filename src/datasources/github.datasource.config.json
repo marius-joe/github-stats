@@ -4,8 +4,27 @@
     "baseURL": "https://api.github.com",
     "options": {
         "headers": {
-            "accept": "application/vnd.github.v3+json"
+            "accept": "application/vnd.github.v3+json",
+            "content-type": "application/json"
         }
     },
-    "crud": false
+    "crud": false,
+    "operations": [
+        {
+            "template": {
+                "method": "GET",
+                "url": "https://api.github.com/users/{username}/repos",
+                "query": {
+                    "type": "owner",
+                    "sort": "full_name",
+                    "direction": "asc"
+                }
+            },
+            "functions": {
+                "getRepositories": [
+                    "username"
+                ]
+            }
+        }
+    ]
 }
