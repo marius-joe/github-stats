@@ -1,6 +1,9 @@
 import { inject } from '@loopback/context'
-import { Repository } from '../models' // check model
-import { get, param } from '@loopback/rest'
+import { get, param, getModelSchemaRef } from '@loopback/rest'
+import { Repository } from '../models'
+import { Branch } from '../models'
+import { GitHubService } from '../services'
+
 
 export class UserController {
     constructor(
@@ -9,8 +12,23 @@ export class UserController {
     ) { }
 
     // returns a list of statistics about the user's own repository (no forked repos)
-    @get('/users/{username}/repositories/own')
-    async add(
+    @get('/users/{username}/repositories/own', {
+        responses: {
+            '200': {
+                description: 'Array of the users own repositories',
+                content: {
+                    'application/json': {
+                        schema: {
+                            type: 'array',
+                            items: getModelSchemaRef(Repository, { includeRelations: true }),
+                        },
+                    },
+                },
+            },
+        },
+    })
+
+    async getUsersOwnRepositories(
         @param.path.string('username') username: string
     ): Promise<Repository[]> {
 
