@@ -27,13 +27,13 @@ export class UserController {
             },
         },
     })
-
     async getUsersOwnRepositories(
         @param.path.string('username') username: string
     ): Promise<Repository[]> {
 
-        let repos: Repository = this.gitHubService.getRepositories({ username })
-        let reposFiltered: object[] = []
+        //let repos: object[] = this.gitHubService.getRepositories(username)
+
+        let reposFiltered: Repository[] = []
 
         // loop through all repositories and collect only those with:
         // repo.fork: false
@@ -48,18 +48,18 @@ export class UserController {
         let branchName = "dev"
         let lastCommitSHA = "1a2b3c4e"
 
-        reposFiltered = [{
-            "name": repoName,
-            "ownerLogin": ownerLogin,
-            "branches": [{
-                "name": branchName,
-                "lastCommit": {
-                    "sha": lastCommitSHA
-                }
-            }
-            ]
-        }
-        ]
+        let repoFiltered: Repository = new Repository()
+        repoFiltered.name = "1. repo"
+        repoFiltered.owner.login = "marius"
+
+        let branchFiltered: Branch = new Branch()
+        branchFiltered.name = "dev"
+        branchFiltered.lastCommit = { sha: "1a2b3c4e" }
+
+        repoFiltered.branches = []
+        repoFiltered.branches.push(branchFiltered)
+
+        reposFiltered.push(repoFiltered)
         return reposFiltered
     }
 
