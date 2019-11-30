@@ -42,7 +42,7 @@ export class UserController {
 
 
                 // hierfür noch function in Service einbauen
-                let branchesGH: BranchGitHub[] = this.gitHubService.getBranches({ username }, { repoGH.name })
+                let branchesGH: BranchGitHub[] = this.gitHubService.getBranches(username, repoGH.name)
 
                 for (const branchGH of branchesGH) {
                     let branchFiltered: Branch = new Branch()
