@@ -50,7 +50,7 @@ export class UserController {
 
         let repoFiltered: Repository = new Repository()
         repoFiltered.name = "1. repo"
-        repoFiltered.owner.login = "marius"
+        repoFiltered.owner = { login: "marius" }
 
         let branchFiltered: Branch = new Branch()
         branchFiltered.name = "dev"
