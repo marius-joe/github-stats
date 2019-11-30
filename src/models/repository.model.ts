@@ -19,9 +19,11 @@ export class Repository extends Entity {
 
     @property({
         type: 'array',
+        required: true,
         itemType: 'object',
+        default: []
     })
-    branches?: Branch[];
+    branches: Branch[];
 
 
     constructor(data?: Partial<Repository>) {

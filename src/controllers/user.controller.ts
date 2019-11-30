@@ -2,8 +2,7 @@ import { inject } from '@loopback/context'
 import { get, param, getModelSchemaRef } from '@loopback/rest'
 import { Repository } from '../models'
 import { Branch } from '../models'
-import { GitHubService } from '../services'
-
+import { GitHubService, RepoGitHub, BranchGitHub } from '../services'
 
 export class UserController {
     constructor(
@@ -31,35 +30,49 @@ export class UserController {
         @param.path.string('username') username: string
     ): Promise<Repository[]> {
 
-        //let repos: object[] = this.gitHubService.getRepositories(username)
-
+        const reposGH: RepoGitHub[] = await this.gitHubService.getRepositories(username);
         let reposFiltered: Repository[] = []
 
-        // loop through all repositories and collect only those with:
-        // repo.fork: false
+        for (const repoGH of reposGH) {
+            if (!(repoGH.fork)) {
+                let repoFiltered: Repository = new Repository()
 
-        // info to collect
-        // repo.name
-        // repo.owner.login
-        // list of branches with names and last commit shas
+                repoFiltered.name = repoGH.name
+                repoFiltered.owner.login = repoGH.owner.login
 
-        let repoName = "1. repo"
-        let ownerLogin = "marius"
-        let branchName = "dev"
-        let lastCommitSHA = "1a2b3c4e"
 
-        let repoFiltered: Repository = new Repository()
-        repoFiltered.name = "1. repo"
-        repoFiltered.owner = { login: "marius" }
+                // hierfür noch function in Service einbauen
+                let branchesGH: BranchGitHub[] = this.gitHubService.getBranches({ username }, { repoGH.name })
 
-        let branchFiltered: Branch = new Branch()
-        branchFiltered.name = "dev"
-        branchFiltered.lastCommit = { sha: "1a2b3c4e" }
+                for (const branchGH of branchesGH) {
+                    let branchFiltered: Branch = new Branch()
 
-        repoFiltered.branches = []
-        repoFiltered.branches.push(branchFiltered)
+                    branchFiltered.name = branchGH.name
+                    branchFiltered.lastCommit = { sha: branchGH.commit.sha }
 
-        reposFiltered.push(repoFiltered)
+                    repoFiltered.branches.push(branchFiltered)
+                }
+                reposFiltered.push(repoFiltered)
+            }
+        }
+
+        // let repoName = "1. repo"
+        // let ownerLogin = "marius"
+        // let branchName = "dev"
+        // let lastCommitSHA = "1a2b3c4e"
+
+        // let repoFiltered: Repository = new Repository()
+        // repoFiltered.name = "1. repo"
+        // repoFiltered.owner = { login: "marius" }
+
+        // let branchFiltered: Branch = new Branch()
+        // branchFiltered.name = "dev"
+        // branchFiltered.lastCommit = { sha: "1a2b3c4e" }
+
+        // repoFiltered.branches = []
+        // repoFiltered.branches.push(branchFiltered)
+
+        // reposFiltered.push(repoFiltered)
         return reposFiltered
     }
 

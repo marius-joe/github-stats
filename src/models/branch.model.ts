@@ -11,9 +11,11 @@ export class Branch extends Entity {
     name: string;
 
     @property({
-        type: 'object'
+        type: 'object',
+        required: true,
+        default: {}
     })
-    lastCommit?: { sha: string };
+    lastCommit: { sha: string };
 
 
     constructor(data?: Partial<Branch>) {
