@@ -1,7 +1,8 @@
-import { Model, model, property } from '@loopback/repository'
+import { Entity, model, property, hasMany } from '@loopback/repository'
+import { Repo } from './repo.model'
 
-@model({ settings: { strict: false } })
-export class User extends Model {
+@model()
+export class User extends Entity {
     @property({
         type: 'string',
         id: true,
@@ -10,17 +11,8 @@ export class User extends Model {
     })
     name: string
 
-    @property({
-        type: 'array',
-        itemType: 'object',
-    })
-    repositories?: object[];
-
-    // Define well-known properties here
-
-    // Indexer property to allow additional data
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    [prop: string]: any
+    @hasMany(() => Repo, { keyTo: 'userName' })
+    repos: Repo[]
 
     constructor(data?: Partial<User>) {
         super(data)

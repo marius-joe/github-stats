@@ -17,6 +17,11 @@ export class Branch extends Entity {
     })
     lastCommit: { sha: string }
 
+    @property({
+        type: 'string',
+    })
+    repoName?: string
+
     constructor(data?: Partial<Branch>) {
         super(data)
     }
