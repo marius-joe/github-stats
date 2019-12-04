@@ -21,7 +21,8 @@
                 }
             },
             "functions": {
-                "getRepositories": ["username"]
+                "getRepositories": ["username"],
+                "getBranches": ["username", "repository"]
             }
         }
     ]

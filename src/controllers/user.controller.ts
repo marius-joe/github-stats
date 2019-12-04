@@ -39,9 +39,7 @@ export class UserController {
                 repoFiltered.name = repoGH.name
                 repoFiltered.owner.login = repoGH.owner.login
 
-                // hierfür noch function in Service einbauen
-                let branchesGH: BranchGitHub[] = this.gitHubService.getBranches(username, repoGH.name)
-
+                const branchesGH: BranchGitHub[] = await this.gitHubService.getBranches(username, repoGH.name)
                 for (const branchGH of branchesGH) {
                     let branchFiltered: Branch = new Branch()
 
@@ -72,13 +70,5 @@ export class UserController {
 
         // reposFiltered.push(repoFiltered)
         return reposFiltered
-
-        // // Reply with a greeting, the current time, the url, and request headers
-        // return {
-        //     greeting: 'Hello from LoopBack',
-        //     date: new Date(),
-        //     url: this.req.url,
-        //     headers: Object.assign({}, this.req.headers),
-        // }
     }
 }

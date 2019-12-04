@@ -17,6 +17,7 @@ export interface BranchGitHub {
 export interface GitHubService {
     // map Node.js method to REST operation as stated in the GitHub datasource file
     getRepositories(username: string): Promise<RepoGitHub[]>
+    getBranches(username: string, repository: string): Promise<BranchGitHub[]>
 }
 
 export class GitHubServiceProvider implements Provider<GitHubService> {
