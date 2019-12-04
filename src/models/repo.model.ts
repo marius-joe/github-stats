@@ -1,8 +1,6 @@
 import { Entity, model, property, hasMany } from '@loopback/repository'
 import { Branch } from './branch.model'
 
-// import { Branch } from '.'
-
 @model()
 export class Repo extends Entity {
     @property({
@@ -26,13 +24,6 @@ export class Repo extends Entity {
 
     @hasMany(() => Branch, { keyTo: 'repoName' })
     branches: Branch[]
-    // @property({
-    //     type: 'array',
-    //     required: true,
-    //     itemType: 'object',
-    //     default: [],
-    // })
-    // branches: Branch[]
 
     constructor(data?: Partial<Repo>) {
         super(data)
