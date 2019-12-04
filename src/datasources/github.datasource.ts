@@ -3,20 +3,20 @@ import {
     lifeCycleObserver,
     LifeCycleObserver,
     ValueOrPromise,
-} from '@loopback/core';
-import { juggler } from '@loopback/repository';
-import * as config from './github.datasource.config.json';
+} from '@loopback/core'
+import {juggler} from '@loopback/repository'
+import * as config from './github.datasource.config.json'
 
 @lifeCycleObserver('datasource')
 export class GithubDataSource extends juggler.DataSource
     implements LifeCycleObserver {
-    static dataSourceName = 'github';
+    static dataSourceName = 'github'
 
     constructor(
-        @inject('datasources.config.github', { optional: true })
+        @inject('datasources.config.github', {optional: true})
         dsConfig: object = config,
     ) {
-        super(dsConfig);
+        super(dsConfig)
     }
 
     /**
@@ -31,6 +31,6 @@ export class GithubDataSource extends juggler.DataSource
      * application to be shut down gracefully.
      */
     stop(): ValueOrPromise<void> {
-        return super.disconnect();
+        return super.disconnect()
     }
 }

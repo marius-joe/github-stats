@@ -1,6 +1,6 @@
-import { Model, model, property } from '@loopback/repository';
+import {Model, model, property} from '@loopback/repository'
 
-@model({ settings: { strict: false } })
+@model({settings: {strict: false}})
 export class User extends Model {
     @property({
         type: 'string',
@@ -8,7 +8,7 @@ export class User extends Model {
         generated: false,
         required: true,
     })
-    name: string;
+    name: string
 
     @property({
         type: 'array',
@@ -20,10 +20,10 @@ export class User extends Model {
 
     // Indexer property to allow additional data
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    [prop: string]: any;
+    [prop: string]: any
 
     constructor(data?: Partial<User>) {
-        super(data);
+        super(data)
     }
 }
 
@@ -31,4 +31,4 @@ export interface UserRelations {
     // describe navigational properties here
 }
 
-export type UserWithRelations = User & UserRelations;
+export type UserWithRelations = User & UserRelations

@@ -1,4 +1,4 @@
-import { Entity, model, property } from '@loopback/repository';
+import {Entity, model, property} from '@loopback/repository'
 
 @model()
 export class Branch extends Entity {
@@ -8,18 +8,17 @@ export class Branch extends Entity {
         generated: false,
         required: true,
     })
-    name: string;
+    name: string
 
     @property({
         type: 'object',
         required: true,
-        default: {}
+        default: {},
     })
-    lastCommit: { sha: string };
-
+    lastCommit: {sha: string}
 
     constructor(data?: Partial<Branch>) {
-        super(data);
+        super(data)
     }
 }
 
@@ -27,4 +26,4 @@ export interface BranchRelations {
     // describe navigational properties here
 }
 
-export type BranchWithRelations = Branch & BranchRelations;
+export type BranchWithRelations = Branch & BranchRelations

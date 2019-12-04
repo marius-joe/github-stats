@@ -1,6 +1,6 @@
-const application = require('./dist');
+const application = require('./dist')
 
-module.exports = application;
+module.exports = application
 
 if (require.main === module) {
     // Run the application
@@ -13,9 +13,9 @@ if (require.main === module) {
                 setServersFromRequest: true,
             },
         },
-    };
+    }
     application.main(config).catch(err => {
-        console.error('Cannot start the application.', err);
-        process.exit(1);
-    });
+        console.error('Cannot start the application.', err)
+        process.exit(1)
+    })
 }

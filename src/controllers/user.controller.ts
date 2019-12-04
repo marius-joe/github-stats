@@ -1,14 +1,14 @@
-import { inject } from '@loopback/context'
-import { get, param, getModelSchemaRef } from '@loopback/rest'
-import { Repository } from '../models'
-import { Branch } from '../models'
-import { GitHubService, RepoGitHub, BranchGitHub } from '../services'
+import {inject} from '@loopback/context'
+import {get, param, getModelSchemaRef} from '@loopback/rest'
+import {Repository} from '../models'
+import {Branch} from '../models'
+import {GitHubService, RepoGitHub, BranchGitHub} from '../services'
 
 export class UserController {
     constructor(
         @inject('services.GitHubService')
         protected gitHubService: GitHubService,
-    ) { }
+    ) {}
 
     // returns a list of statistics about the user's own repository (no forked repos)
     @get('/users/{username}/repositories/own', {
@@ -19,7 +19,9 @@ export class UserController {
                     'application/json': {
                         schema: {
                             type: 'array',
-                            items: getModelSchemaRef(Repository, { includeRelations: true }),
+                            items: getModelSchemaRef(Repository, {
+                                includeRelations: true,
+                            }),
                         },
                     },
                 },
@@ -27,28 +29,31 @@ export class UserController {
         },
     })
     async getUsersOwnRepositories(
-        @param.path.string('username') username: string
+        @param.path.string('username') username: string,
     ): Promise<Repository[]> {
-
-        const reposGH: RepoGitHub[] = await this.gitHubService.getRepositories(username);
+        const reposGH: RepoGitHub[] = await this.gitHubService.getRepositories(
+            username,
+        )
         let reposFiltered: Repository[] = []
 
         for (const repoGH of reposGH) {
-            if (!(repoGH.fork)) {
+            if (!repoGH.fork) {
                 let repoFiltered: Repository = new Repository()
 
                 repoFiltered.name = repoGH.name
                 repoFiltered.owner.login = repoGH.owner.login
 
-
                 // hierfür noch function in Service einbauen
-                let branchesGH: BranchGitHub[] = this.gitHubService.getBranches(username, repoGH.name)
+                let branchesGH: BranchGitHub[] = this.gitHubService.getBranches(
+                    username,
+                    repoGH.name,
+                )
 
                 for (const branchGH of branchesGH) {
                     let branchFiltered: Branch = new Branch()
 
                     branchFiltered.name = branchGH.name
-                    branchFiltered.lastCommit = { sha: branchGH.commit.sha }
+                    branchFiltered.lastCommit = {sha: branchGH.commit.sha}
 
                     repoFiltered.branches.push(branchFiltered)
                 }
@@ -74,6 +79,13 @@ export class UserController {
 
         // reposFiltered.push(repoFiltered)
         return reposFiltered
-    }
 
+        // // Reply with a greeting, the current time, the url, and request headers
+        // return {
+        //     greeting: 'Hello from LoopBack',
+        //     date: new Date(),
+        //     url: this.req.url,
+        //     headers: Object.assign({}, this.req.headers),
+        // }
+    }
 }

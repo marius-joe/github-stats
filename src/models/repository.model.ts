@@ -1,5 +1,5 @@
-import { Entity, model, property } from '@loopback/repository';
-import { Branch } from '.'
+import {Entity, model, property} from '@loopback/repository'
+import {Branch} from '.'
 
 @model()
 export class Repository extends Entity {
@@ -9,25 +9,24 @@ export class Repository extends Entity {
         generated: false,
         required: true,
     })
-    name: string;
+    name: string
 
     @property({
         type: 'object',
         required: true,
     })
-    owner: { login: string };
+    owner: {login: string}
 
     @property({
         type: 'array',
         required: true,
         itemType: 'object',
-        default: []
+        default: [],
     })
-    branches: Branch[];
-
+    branches: Branch[]
 
     constructor(data?: Partial<Repository>) {
-        super(data);
+        super(data)
     }
 }
 
@@ -35,4 +34,4 @@ export interface RepositoryRelations {
     // describe navigational properties here
 }
 
-export type RepositoryWithRelations = Repository & RepositoryRelations;
+export type RepositoryWithRelations = Repository & RepositoryRelations
