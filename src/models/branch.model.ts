@@ -1,4 +1,4 @@
-import {Entity, model, property} from '@loopback/repository'
+import { Entity, model, property } from '@loopback/repository'
 
 @model()
 export class Branch extends Entity {
@@ -15,7 +15,7 @@ export class Branch extends Entity {
         required: true,
         default: {},
     })
-    lastCommit: {sha: string}
+    lastCommit: { sha: string }
 
     constructor(data?: Partial<Branch>) {
         super(data)

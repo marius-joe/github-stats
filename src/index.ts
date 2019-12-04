@@ -1,7 +1,7 @@
-import {GitHubStatsApplication} from './application'
-import {ApplicationConfig} from '@loopback/core'
+import { GitHubStatsApplication } from './application'
+import { ApplicationConfig } from '@loopback/core'
 
-export {GitHubStatsApplication}
+export { GitHubStatsApplication }
 
 export async function main(options: ApplicationConfig = {}) {
     const app = new GitHubStatsApplication(options)

@@ -1,5 +1,5 @@
 {
-  "@loopback/cli": {
-    "version": "1.25.1"
-  }
+    "@loopback/cli": {
+        "version": "1.25.1"
+    }
 }

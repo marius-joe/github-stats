@@ -1,16 +1,16 @@
-import {getService} from '@loopback/service-proxy'
-import {inject, Provider} from '@loopback/core'
-import {GithubDataSource} from '../datasources'
+import { getService } from '@loopback/service-proxy'
+import { inject, Provider } from '@loopback/core'
+import { GithubDataSource } from '../datasources'
 
 export interface RepoGitHub {
     name: string
-    owner: {login: string}
+    owner: { login: string }
     [x: string]: any
 }
 
 export interface BranchGitHub {
     name: string
-    commit: {sha: string}
+    commit: { sha: string }
     [x: string]: any
 }
 

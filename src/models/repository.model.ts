@@ -1,5 +1,5 @@
-import {Entity, model, property} from '@loopback/repository'
-import {Branch} from '.'
+import { Entity, model, property } from '@loopback/repository'
+import { Branch } from '.'
 
 @model()
 export class Repository extends Entity {
@@ -15,7 +15,7 @@ export class Repository extends Entity {
         type: 'object',
         required: true,
     })
-    owner: {login: string}
+    owner: { login: string }
 
     @property({
         type: 'array',

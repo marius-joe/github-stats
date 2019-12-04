@@ -1,8 +1,8 @@
-import {inject} from '@loopback/context'
-import {get, param, getModelSchemaRef} from '@loopback/rest'
-import {Repository} from '../models'
-import {Branch} from '../models'
-import {GitHubService, RepoGitHub, BranchGitHub} from '../services'
+import { inject } from '@loopback/context'
+import { get, param, getModelSchemaRef } from '@loopback/rest'
+import { Repository } from '../models'
+import { Branch } from '../models'
+import { GitHubService, RepoGitHub, BranchGitHub } from '../services'
 
 export class UserController {
     constructor(
@@ -46,7 +46,7 @@ export class UserController {
                     let branchFiltered: Branch = new Branch()
 
                     branchFiltered.name = branchGH.name
-                    branchFiltered.lastCommit = {sha: branchGH.commit.sha}
+                    branchFiltered.lastCommit = { sha: branchGH.commit.sha }
 
                     repoFiltered.branches.push(branchFiltered)
                 }
