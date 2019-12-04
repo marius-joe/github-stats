@@ -1,15 +1,9 @@
-import {
-    inject,
-    lifeCycleObserver,
-    LifeCycleObserver,
-    ValueOrPromise,
-} from '@loopback/core'
+import {inject, lifeCycleObserver, LifeCycleObserver, ValueOrPromise} from '@loopback/core'
 import {juggler} from '@loopback/repository'
 import * as config from './github.datasource.config.json'
 
 @lifeCycleObserver('datasource')
-export class GithubDataSource extends juggler.DataSource
-    implements LifeCycleObserver {
+export class GithubDataSource extends juggler.DataSource implements LifeCycleObserver {
     static dataSourceName = 'github'
 
     constructor(

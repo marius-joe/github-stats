@@ -28,12 +28,8 @@ export class UserController {
             },
         },
     })
-    async getUsersOwnRepositories(
-        @param.path.string('username') username: string,
-    ): Promise<Repository[]> {
-        const reposGH: RepoGitHub[] = await this.gitHubService.getRepositories(
-            username,
-        )
+    async getUsersOwnRepositories(@param.path.string('username') username: string): Promise<Repository[]> {
+        const reposGH: RepoGitHub[] = await this.gitHubService.getRepositories(username)
         let reposFiltered: Repository[] = []
 
         for (const repoGH of reposGH) {
@@ -44,10 +40,7 @@ export class UserController {
                 repoFiltered.owner.login = repoGH.owner.login
 
                 // hierfür noch function in Service einbauen
-                let branchesGH: BranchGitHub[] = this.gitHubService.getBranches(
-                    username,
-                    repoGH.name,
-                )
+                let branchesGH: BranchGitHub[] = this.gitHubService.getBranches(username, repoGH.name)
 
                 for (const branchGH of branchesGH) {
                     let branchFiltered: Branch = new Branch()
