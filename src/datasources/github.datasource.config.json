@@ -13,15 +13,30 @@
         {
             "template": {
                 "method": "GET",
-                "url": "https://api.github.com/users/{username}/repos",
-                "query": {
-                    "type": "owner",
-                    "sort": "full_name",
-                    "direction": "asc"
-                }
+                "url": "/users/{username}",
+                "query": { "type": "owner", "sort": "full_name", "direction": "asc" }
             },
             "functions": {
-                "getRepositories": ["username"],
+                "getUser": ["username"]
+            }
+        },
+        {
+            "template": {
+                "method": "GET",
+                "url": "/users/{username}/repos",
+                "query": { "type": "owner", "sort": "full_name", "direction": "asc" }
+            },
+            "functions": {
+                "getRepositories": ["username"]
+            }
+        },
+        {
+            "template": {
+                "method": "GET",
+                "url": "/repos/{username}/{repository}/branches",
+                "query": { "type": "owner", "sort": "full_name", "direction": "asc" }
+            },
+            "functions": {
                 "getBranches": ["username", "repository"]
             }
         }

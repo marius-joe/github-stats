@@ -1,6 +1,6 @@
 import { inject } from '@loopback/context'
-import { del, get, getModelSchemaRef, getWhereSchemaFor, param, patch, post, requestBody } from '@loopback/rest'
-import { User, Repo, Branch } from '../models'
+import { get, getModelSchemaRef, param } from '@loopback/rest'
+import { Repo, Branch } from '../models'
 import { GitHubService, RepoGitHub, BranchGitHub } from '../services/github.service'
 
 // for future own db access

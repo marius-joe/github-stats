@@ -1,3 +1,3 @@
 # Repositories
 
-This directory contains code for repositories provided by this app.
+This directory contains code for database connecting repositories provided by this app.

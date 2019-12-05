@@ -1,6 +1,6 @@
 import { inject } from '@loopback/context'
 import { get, param, getModelSchemaRef } from '@loopback/rest'
-import { User, Repo } from '../models'
+import { User } from '../models'
 import { GitHubService, UserGitHub, RepoGitHub, BranchGitHub } from '../services/github.service'
 import { UserRepoController } from '../controllers'
 

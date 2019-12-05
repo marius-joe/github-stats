@@ -30,8 +30,6 @@ export class Repo extends Entity {
     }
 }
 
-export interface RepoRelations {
-    // describe navigational properties here
-}
+export interface RepoRelations {}
 
 export type RepoWithRelations = Repo & RepoRelations

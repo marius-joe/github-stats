@@ -27,8 +27,6 @@ export class Branch extends Entity {
     }
 }
 
-export interface BranchRelations {
-    // describe navigational properties here
-}
+export interface BranchRelations {}
 
 export type BranchWithRelations = Branch & BranchRelations
