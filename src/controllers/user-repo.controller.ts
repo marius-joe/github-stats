@@ -43,7 +43,7 @@ export class UserRepoController {
                 let repoFiltered: Repo = new Repo()
 
                 repoFiltered.name = repoGH.name
-                repoFiltered.owner.login = repoGH.owner.login
+                repoFiltered.userName = repoGH.owner.login
 
                 const branchesGH: BranchGitHub[] = await this.gitHubService.getBranches(username, repoGH.name)
                 for (const branchGH of branchesGH) {

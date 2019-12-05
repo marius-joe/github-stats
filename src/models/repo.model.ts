@@ -12,15 +12,10 @@ export class Repo extends Entity {
     name: string
 
     @property({
-        type: 'object',
+        type: 'string',
         required: true,
     })
-    owner: { login: string }
-
-    @property({
-        type: 'string',
-    })
-    userName?: string
+    userName: string
 
     @hasMany(() => Branch, { keyTo: 'repoName' })
     branches: Branch[]
