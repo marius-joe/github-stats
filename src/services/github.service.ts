@@ -2,6 +2,16 @@ import { getService } from '@loopback/service-proxy'
 import { inject, Provider } from '@loopback/core'
 import { GithubDataSource } from '../datasources'
 
+export interface UserGitHub {
+    login: string
+    name: string
+    html_url: string
+    location: string
+    bio: string
+    public_repos: number
+    [x: string]: any
+}
+
 export interface RepoGitHub {
     name: string
     owner: { login: string }
@@ -16,6 +26,7 @@ export interface BranchGitHub {
 
 export interface GitHubService {
     // map Node.js method to REST operation as stated in the GitHub datasource file
+    getUser(username: string): Promise<UserGitHub>
     getRepositories(username: string): Promise<RepoGitHub[]>
     getBranches(username: string, repository: string): Promise<BranchGitHub[]>
 }

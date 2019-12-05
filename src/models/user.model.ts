@@ -11,6 +11,33 @@ export class User extends Entity {
     })
     name: string
 
+    @property({
+        type: 'string',
+        required: true,
+    })
+    name_alias: string
+
+    @property({
+        type: 'string',
+        required: true,
+    })
+    url: string
+
+    @property({
+        type: 'string',
+    })
+    location?: string
+
+    @property({
+        type: 'string',
+    })
+    bio?: string
+
+    @property({
+        type: 'string',
+    })
+    num_public_repos?: number
+
     @hasMany(() => Repo, { keyTo: 'userName' })
     repos: Repo[]
 
