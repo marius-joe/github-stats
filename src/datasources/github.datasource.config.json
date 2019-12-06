@@ -1,0 +1,44 @@
+{
+    "name": "github",
+    "connector": "rest",
+    "baseURL": "https://api.github.com",
+    "options": {
+        "headers": {
+            "accept": "application/vnd.github.v3+json",
+            "content-type": "application/json"
+        }
+    },
+    "crud": false,
+    "operations": [
+        {
+            "template": {
+                "method": "GET",
+                "url": "/users/{username}",
+                "query": { "type": "owner", "sort": "full_name", "direction": "asc" }
+            },
+            "functions": {
+                "getUser": ["username"]
+            }
+        },
+        {
+            "template": {
+                "method": "GET",
+                "url": "/users/{username}/repos",
+                "query": { "type": "owner", "sort": "full_name", "direction": "asc" }
+            },
+            "functions": {
+                "getRepositories": ["username"]
+            }
+        },
+        {
+            "template": {
+                "method": "GET",
+                "url": "/repos/{username}/{repository}/branches",
+                "query": { "type": "owner", "sort": "full_name", "direction": "asc" }
+            },
+            "functions": {
+                "getBranches": ["username", "repository"]
+            }
+        }
+    ]
+}
