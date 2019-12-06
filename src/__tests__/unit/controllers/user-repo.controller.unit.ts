@@ -20,14 +20,14 @@ describe('UserRepoController (unit)', () => {
                     name: 'test-branch-name',
                     lastCommit: { sha: 'test-commit-sha' },
                     repoName: 'test-repo',
-                }
+                },
             ])
 
             getRepositories.resolves([
                 {
                     name: 'test-repo',
                     userName: 'test-user-name',
-                    branches: getBranches
+                    branches: getBranches,
                 },
             ])
 
@@ -36,7 +36,7 @@ describe('UserRepoController (unit)', () => {
             expect(ownRepositories).to.containEql({
                 name: 'test-repo',
                 userName: 'test-user-name',
-                branches: [{name: 'test-branch-name'}]
+                branches: [{ name: 'test-branch-name' }],
             })
         })
     })
@@ -58,42 +58,3 @@ describe('UserRepoController (unit)', () => {
         getBranches = gitHubService.getBranches as sinon.SinonStub
     }
 })
-
-
-
-
-
-
-
-
-
-
-describe('UserRepoController (unit)', () => {
-    let repository: StubbedInstanceWithSinonAccessor<RepoRepository>
-    beforeEach(givenStubbedRepository)
-
-    describe('getOwnRepositories()', () => {
-        it('retrieves information of a user', async () => {
-            const controller = new UserRepoController(repository)
-            repository.stubs.find.resolves([
-                {
-                    name: 'test-repo',
-                    userName: 'test-user',
-                    branches: [
-                        {
-                            name: 'test-branch-name',
-                            lastCommit: { sha: 'test-commit-sha' },
-                            repoName: 'test-repo',
-                        },
-                    ],
-                },
-            ])
-
-            const details = await controller.getOwnRepositories('test-user')
-
-            expect(details).to.containEql({ name: 'test-repo', userName: 'test-user' })
-            sinon.assert.calledWithMatch(repository.stubs.find, {
-                where: { name: 'test-repo' },
-            })
-        })
-    })
