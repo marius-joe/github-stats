@@ -1,4 +1,4 @@
-name: Deploy the application to Google Cloud Run
+name: GCloudRunDeployment
 on:
     push:
         branches:
