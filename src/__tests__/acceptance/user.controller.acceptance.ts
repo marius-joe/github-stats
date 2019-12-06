@@ -2,7 +2,7 @@ import { Client, expect } from '@loopback/testlab'
 import { GitHubStatsApplication } from '../..'
 import { setupApplication } from './test-helper'
 
-describe('PingController', () => {
+describe('UserController', () => {
     let app: GitHubStatsApplication
     let client: Client
 
@@ -14,8 +14,8 @@ describe('PingController', () => {
         await app.stop()
     })
 
-    it('invokes GET /ping', async () => {
-        const res = await client.get('/ping?msg=world').expect(200)
-        expect(res.body).to.containEql({ greeting: 'Hello from LoopBack' })
+    it('invokes GET /users/{username}', async () => {
+        const res = await client.get('/users/marius-joe').expect(200)
+        expect(res.body).to.containEql({ name_alias: 'Marius Joe' })
     })
 })
