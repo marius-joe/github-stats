@@ -1,4 +1,4 @@
-name: GCloudRunDeployment
+name: GCloudRunDeployment_PROD
 on:
     push:
         branches:
@@ -30,9 +30,9 @@ jobs:
               uses: actions/gcloud/cli@master
               with:
                   entrypoint: sh
-                  args: -c "docker push eu.gcr.io/${{ secrets.GCLOUD_PROJECT }}/${{ secrets.GCLOUD_APP_NAME }}"
+                  args: -c "docker push eu.gcr.io/${{ secrets.GCLOUD_PROJECT_PROD }}/${{ secrets.GCLOUD_APP_NAME }}"
 
             - name: Deploy on Cloud Run
               uses: actions/gcloud/cli@master
               with:
-                  args: 'components install beta --quiet && gcloud beta run deploy ${{ secrets.GCLOUD_APP_NAME }} --quiet --image eu.gcr.io/${{ secrets.GCLOUD_PROJECT }}/${{ secrets.GCLOUD_APP_NAME }} --project ${{ secrets.GCLOUD_PROJECT }} --region europe-west3 --platform managed'
+                  args: 'components install beta --quiet && gcloud beta run deploy ${{ secrets.GCLOUD_APP_NAME }} --quiet --image eu.gcr.io/${{ secrets.GCLOUD_PROJECT_PROD }}/${{ secrets.GCLOUD_APP_NAME }} --project ${{ secrets.GCLOUD_PROJECT_PROD }} --region europe-west3 --platform managed'
