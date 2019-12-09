@@ -35,4 +35,4 @@ jobs:
             - name: Deploy on Cloud Run
               uses: actions/gcloud/cli@master
               with:
-                  args: 'components install beta --quiet && gcloud beta run deploy ${{ secrets.GCLOUD_APP_NAME }} --quiet --image eu.gcr.io/${{ secrets.GCLOUD_PROJECT_DEV }}/${{ secrets.GCLOUD_APP_NAME }} --project ${{ secrets.GCLOUD_PROJECT_DEV }} --region europe-west3 --platform managed'
+                  args: 'components install beta --quiet && gcloud beta run deploy ${{ secrets.GCLOUD_APP_NAME }} --quiet --image eu.gcr.io/${{ secrets.GCLOUD_PROJECT_DEV }}/${{ secrets.GCLOUD_APP_NAME }} --project ${{ secrets.GCLOUD_PROJECT_DEV }} --region europe-west1 --platform managed'
