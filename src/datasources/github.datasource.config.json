@@ -23,7 +23,7 @@
         {
             "template": {
                 "method": "GET",
-                "url": "/users/{username}/repos",
+                "url": "/repos/{username}",
                 "query": { "type": "owner", "sort": "full_name", "direction": "asc" }
             },
             "functions": {
