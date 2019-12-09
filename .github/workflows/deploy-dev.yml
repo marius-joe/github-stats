@@ -1,12 +1,12 @@
-name: GCloudRunDeployment
+name: GCloudRunDeployment_DEV
 on:
     push:
         branches:
-            - 'master'
+            - 'dev'
 
 jobs:
     deploy:
-        name: Deploy job
+        name: Deploy to DEV environment
         runs-on: ubuntu-latest
         steps:
             - name: Checkout the repository
@@ -14,12 +14,12 @@ jobs:
 
             - name: Build Docker image
               run: |
-                  docker build . --tag eu.gcr.io/${{ secrets.GCLOUD_PROJECT }}/${{ secrets.GCLOUD_APP_NAME }}
+                  docker build . --tag eu.gcr.io/${{ secrets.GCLOUD_PROJECT_DEV }}/${{ secrets.GCLOUD_APP_NAME }}
 
             - name: Authenticate into Google Cloud Platform
               uses: actions/gcloud/auth@master
               env:
-                  GCLOUD_AUTH: ${{ secrets.GCLOUD_AUTH }}
+                  GCLOUD_AUTH: ${{ secrets.GCLOUD_AUTH_DEV }}
 
             - name: Configure Docker to use Google Cloud Platform
               uses: actions/gcloud/cli@master
@@ -30,9 +30,9 @@ jobs:
               uses: actions/gcloud/cli@master
               with:
                   entrypoint: sh
-                  args: -c "docker push eu.gcr.io/${{ secrets.GCLOUD_PROJECT }}/${{ secrets.GCLOUD_APP_NAME }}"
+                  args: -c "docker push eu.gcr.io/${{ secrets.GCLOUD_PROJECT_DEV }}/${{ secrets.GCLOUD_APP_NAME }}"
 
-            - name: Install beta commands and deploy on cloud run
+            - name: Deploy on Cloud Run
               uses: actions/gcloud/cli@master
               with:
-                  args: 'components install beta --quiet && gcloud beta run deploy ${{ secrets.GCLOUD_APP_NAME }} --quiet --image eu.gcr.io/${{ secrets.GCLOUD_PROJECT }}/${{ secrets.GCLOUD_APP_NAME }} --project ${{ secrets.GCLOUD_PROJECT }} --region europe-west1 --platform managed'
+                  args: 'components install beta --quiet && gcloud beta run deploy ${{ secrets.GCLOUD_APP_NAME }} --quiet --image eu.gcr.io/${{ secrets.GCLOUD_PROJECT_DEV }}/${{ secrets.GCLOUD_APP_NAME }} --project ${{ secrets.GCLOUD_PROJECT_DEV }} --region europe-west3 --platform managed'
