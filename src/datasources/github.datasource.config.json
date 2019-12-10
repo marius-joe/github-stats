@@ -24,7 +24,7 @@
         {
             "template": {
                 "method": "GET",
-                "url": "https://api.github.com/repos/{username}",
+                "url": "https://api.github.com/users/{username}/repos",
                 "query": { "type": "owner", "sort": "full_name", "direction": "asc" }
             },
             "functions": {
