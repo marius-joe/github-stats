@@ -13,7 +13,7 @@
         {
             "template": {
                 "method": "GET",
-                "url": "/users/{username}",
+                "url": "https://api.github.com/users/{username}",
                 "query": { "type": "owner", "sort": "full_name", "direction": "asc" }
             },
             "functions": {
@@ -23,7 +23,7 @@
         {
             "template": {
                 "method": "GET",
-                "url": "/repos/{username}",
+                "url": "https://api.github.com/repos/{username}",
                 "query": { "type": "owner", "sort": "full_name", "direction": "asc" }
             },
             "functions": {
@@ -33,7 +33,7 @@
         {
             "template": {
                 "method": "GET",
-                "url": "/repos/{username}/{repository}/branches",
+                "url": "https://api.github.com/repos/{username}/{repository}/branches",
                 "query": { "type": "owner", "sort": "full_name", "direction": "asc" }
             },
             "functions": {
