@@ -5,7 +5,8 @@
     "options": {
         "headers": {
             "accept": "application/vnd.github.v3+json",
-            "content-type": "application/json"
+            "content-type": "application/json",
+            "user-agent": "github-stats-app"
         }
     },
     "crud": false,
