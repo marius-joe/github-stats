@@ -13,6 +13,25 @@ export interface GitHubService {
 }
 
 /**
+ * GitHub Error response
+ */
+export interface ErrorGetGitHub {
+    message: string
+    documentation_url?: string
+}
+
+//
+export class UserNotFoundError extends Error {
+    code: string
+    entityName: string
+}
+
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export function isEntityNotFoundError(e: any): boolean {
+    return e instanceof UserNotFoundError
+}
+
+/**
  * A GitHub User
  */
 export interface UserGitHub {

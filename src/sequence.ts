@@ -23,6 +23,7 @@ export class MySequence implements SequenceHandler {
     ) {}
 
     async handle(context: RequestContext) {
+        // console.log('before request')
         try {
             const { request, response } = context
             const route = this.findRoute(request)
@@ -32,5 +33,6 @@ export class MySequence implements SequenceHandler {
         } catch (err) {
             this.reject(context, err)
         }
+        // console.log('after request')
     }
 }

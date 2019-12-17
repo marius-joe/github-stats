@@ -20,20 +20,17 @@ export class CustomRejectProvider implements Provider<Reject> {
      * @param response - The response object used to reply to the client.
      */
     action({ request, response }: HandlerContext, error: Error) {
-        // toDo: map ENTITY_NOT_FOUND to 404
         response.setHeader('Content-Type', 'application/json')
-        if (error instanceof HttpErrors) {
+        if (error instanceof HttpErrors.HttpError) {
             const httpError = HttpErrors(error)
             const errCode = httpError.statusCode
-
-            response.status(errCode).send(httpError.message)
             response.status(errCode).json({
                 status: errCode,
-                Message: httpError.message,
+                message: httpError.message,
             })
-            // `${errCode}`
+            response.end()
         } else {
-            response.end() // right here ?
+            response.end()
         }
     }
 }

@@ -45,7 +45,10 @@ export class GitHubStatsApplication extends BootMixin(ServiceMixin(RepositoryMix
 
     async start() {
         await super.start()
-        const rest = await this.getServer(RestServer)
-        console.log(`github-stats REST server running on port: ${await rest.get('rest.port')}`)
+        const restServer = await this.getServer(RestServer)
+        const url = await restServer.get('rest.url')
+        //const port = await restServer.get('rest.port')
+        console.log(`github-stats REST server running on ${url}`)
+        console.log(`Try ${url}/users/marius-joe`)
     }
 }
