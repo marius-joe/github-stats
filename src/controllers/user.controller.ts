@@ -1,14 +1,11 @@
 import { inject } from '@loopback/context'
-import { get, param, getModelSchemaRef, HttpErrors } from '@loopback/rest'
+import { Request, RestBindings, get, param, getModelSchemaRef, HttpErrors } from '@loopback/rest'
 import { User } from '../models'
 import { GitHubService, UserGitHub } from '../services/github.service'
 import { UserRepoController } from '../controllers'
 
 export class UserController {
-    constructor(
-        @inject('services.GitHubService')
-        protected gitHubService: GitHubService,
-    ) {}
+    constructor(@inject('services.GitHubService') protected gitHubService: GitHubService) {}
 
     // returns information about the specified GitHub user
     @get('/users/{username}', {

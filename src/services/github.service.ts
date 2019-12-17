@@ -1,4 +1,4 @@
-import { getService } from '@loopback/service-proxy'
+import { getService, juggler } from '@loopback/service-proxy'
 import { inject, Provider } from '@loopback/core'
 import { GithubDataSource } from '../datasources'
 
@@ -44,12 +44,13 @@ export interface BranchGitHub {
 }
 
 /**
- * A REST Service Provider to connect to the GitHub API
+ * A Provider for the GitHub service.
+ * Allows both, controllers and integration tests, to access the same GitHub service proxy implementation
  */
 export class GitHubServiceProvider implements Provider<GitHubService> {
     constructor(
         @inject('datasources.github')
-        protected dataSource: GithubDataSource = new GithubDataSource(),
+        protected dataSource: juggler.DataSource = new GithubDataSource(),
     ) {}
 
     value(): Promise<GitHubService> {
@@ -58,7 +59,7 @@ export class GitHubServiceProvider implements Provider<GitHubService> {
 }
 
 /**
- * A generic service interface with any number of methods that return a promise
+ * A generic service interface with any number of methods that return a promise.
  * Can be uses for more general purposes than my GitHub Proxy Service
  */
 // export interface GenericService {
