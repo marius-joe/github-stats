@@ -27,10 +27,25 @@ export class CustomRejectProvider implements Provider<Reject> {
             switch (errCode) {
                 case 404: {
                     response.status(errCode).send(httpError.message)
-                    // response.status(errCode).json({testMessage: httpError.message})
+                    // response.status(errCode).json(
+                             //{
+                            //     status: errCode,
+                            //     Message: httpError.message
+                             //}                        
+                        //{testMessage: httpError.message}
+                        
+                        //)
+                        // `
                     break
                 }
                 default: {
+                    response.status(errCode).json(
+                        {
+                            status: errCode,
+                            Message: httpError.message + "  das ist ser default case"
+                        }
+                    )
+                       // {testMessage: httpError.message}            
                     break
                 }
             }
