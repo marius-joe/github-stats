@@ -25,20 +25,11 @@ export class UserController {
             },
         },
     })
-    async getUserInfo(
-        @param.path.string('username') username: string,
-        //@param.header.string('content-type') content-type != 'accept: application/xml'
-    ): Promise<User> {
+    async getUserInfo(@param.path.string('username') username: string): Promise<User> {
         let userGH
         let response: any
-        // doDo
-        // request.header checken   Accept: application/xml  -> 406
-        let reqHeader = request.header
-        try {
-            if (reqHeader.toLowerCase() === 'accept: application/xml') {
-                throw new HttpErrors.NotAcceptable(`Content-Type  '${reqHeader}'  not supported`)
-            }
 
+        try {
             userGH = await this.gitHubService.getUser(username)
         } catch (e) {
             if (e instanceof HttpErrors) {
@@ -50,6 +41,7 @@ export class UserController {
                         break
                     }
                     default: {
+                        throw e
                         break
                     }
                 }
