@@ -39,11 +39,13 @@ export class UserRepoController {
         let reposFiltered: Repo[] = []
 
         for (const repoGH of reposGH) {
+            // return only own repositories of the user excluding forks
             if (!repoGH.fork) {
                 let repoFiltered: Repo = new Repo()
 
                 repoFiltered.name = repoGH.name
                 repoFiltered.userName = repoGH.owner.login
+                repoFiltered.branches = []
 
                 const branchesGH: BranchGitHub[] = await this.gitHubService.getBranches(username, repoGH.name)
                 for (const branchGH of branchesGH) {
