@@ -20,34 +20,6 @@ paths:
                 items:
                   $ref: '#/components/schemas/User'
                   definitions:
-                    Branch:
-                      title: Branch
-                      properties:
-                        name:
-                          type: string
-                        lastCommit:
-                          type: object
-                        repoName:
-                          type: string
-                      required:
-                        - name
-                        - lastCommit
-                      additionalProperties: false
-                    Repo:
-                      title: Repo
-                      properties:
-                        name:
-                          type: string
-                        userName:
-                          type: string
-                        branches:
-                          type: array
-                          items:
-                            $ref: '#/components/schemas/Branch'
-                      required:
-                        - name
-                        - userName
-                      additionalProperties: false
                     User:
                       title: User
                       properties:
@@ -71,6 +43,34 @@ paths:
                         - name
                         - nameAlias
                         - url
+                      additionalProperties: false
+                    Repo:
+                      title: Repo
+                      properties:
+                        name:
+                          type: string
+                        userName:
+                          type: string
+                        branches:
+                          type: array
+                          items:
+                            $ref: '#/components/schemas/Branch'
+                      required:
+                        - name
+                        - userName
+                      additionalProperties: false
+                    Branch:
+                      title: Branch
+                      properties:
+                        name:
+                          type: string
+                        lastCommit:
+                          type: object
+                        repoName:
+                          type: string
+                      required:
+                        - name
+                        - lastCommit
                       additionalProperties: false
       parameters:
         - name: username

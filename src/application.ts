@@ -21,14 +21,14 @@ export class GitHubStatsApplication extends BootMixin(ServiceMixin(RepositoryMix
         // overridden by the custom 'reject' listed under the RestBindings.SequenceActions namespace
         this.bind(RestBindings.SequenceActions.REJECT).toProvider(CustomRejectProvider)
 
-        // Set up default home page
-        this.static('/', path.join(__dirname, '../public'))
+        // // Set up default home page
+        // this.static('/', path.join(__dirname, '../public'))
 
-        // Customize @loopback/rest-explorer configuration here
-        this.bind(RestExplorerBindings.CONFIG).to({
-            path: '/explorer',
-        })
-        this.component(RestExplorerComponent)
+        // // Customize @loopback/rest-explorer configuration here
+        // this.bind(RestExplorerBindings.CONFIG).to({
+        //     path: '/explorer',
+        // })
+        // this.component(RestExplorerComponent)
 
         this.projectRoot = __dirname
         // Customize @loopback/boot Booter Conventions here
