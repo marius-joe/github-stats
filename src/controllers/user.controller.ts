@@ -36,7 +36,7 @@ export class UserController {
 
         try {
             // given header 'Accept: application/xml', the request will be rejected
-            if (reqAcceptType && reqAcceptType.toLowerCase() == 'application/xml') {
+            if (reqAcceptType && reqAcceptType.toLowerCase() === 'application/xml') {
                 throw new HttpErrors.NotAcceptable(
                     `Unsupported response type '${reqAcceptType}' for path: '${reqPath}'`,
                 )
@@ -63,15 +63,15 @@ export class UserController {
             }
         }
 
-        let userFiltered: User = new User()
+        const userFiltered: User = new User()
         userFiltered.name = userGH.login
-        userFiltered.name_alias = userGH.name
+        userFiltered.nameAlias = userGH.name
         userFiltered.url = userGH.html_url
         userFiltered.location = userGH.location
         userFiltered.bio = userGH.bio
-        userFiltered.num_public_repos = userGH.public_repos
+        userFiltered.numPublicRepos = userGH.public_repos
 
-        let userRepoController = new UserRepoController(this.gitHubService, this.request)
+        const userRepoController = new UserRepoController(this.gitHubService, this.request)
         userFiltered.repos = await userRepoController.getOwnRepositories(userFiltered.name)
 
         return userFiltered

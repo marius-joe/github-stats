@@ -7,7 +7,6 @@ import { ServiceMixin } from '@loopback/service-proxy'
 import * as path from 'path'
 import { MySequence } from './sequence'
 import { CustomRejectProvider } from './providers/custom-reject.provider'
-import { BindingScope } from '@loopback/context'
 
 // Configure mixin class to prevent errors when a service or repository should be registered automatically via a provider
 // e.g. : "app.serviceProvider() function is needed for ServiceBooter"

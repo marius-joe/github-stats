@@ -15,7 +15,7 @@ export class User extends Entity {
         type: 'string',
         required: true,
     })
-    name_alias: string
+    nameAlias: string
 
     @property({
         type: 'string',
@@ -36,7 +36,7 @@ export class User extends Entity {
     @property({
         type: 'string',
     })
-    num_public_repos?: number
+    numPublicRepos?: number
 
     @hasMany(() => Repo, { keyTo: 'userName' })
     repos: Repo[]
