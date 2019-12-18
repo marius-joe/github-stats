@@ -29,14 +29,17 @@ export class UserController {
         },
     })
     async getUserInfo(@param.path.string('username') username: string): Promise<User> {
-        let reqAcceptType: string | undefined = this.request.headers.accept
-        let userGH: UserGitHub
+        const reqAcceptType: string | undefined = this.request.headers.accept
+        const reqPath: string = this.request.path
         let errMsg: string
+        let userGH: UserGitHub
 
         try {
             // given header 'Accept: application/xml', the request will be rejected
             if (reqAcceptType && reqAcceptType.toLowerCase() == 'application/xml') {
-                throw new HttpErrors.NotAcceptable(`Unsupported response type '${this.request.headers.accept}'`)
+                throw new HttpErrors.NotAcceptable(
+                    `Unsupported response type '${reqAcceptType}' for path: '${reqPath}'`,
+                )
             }
             // if GitHub can not be reached or the specified user was not found, handle the errors also below
             userGH = await this.gitHubService.getUser(username)
@@ -68,7 +71,7 @@ export class UserController {
         userFiltered.bio = userGH.bio
         userFiltered.num_public_repos = userGH.public_repos
 
-        let userRepoController = new UserRepoController(this.gitHubService)
+        let userRepoController = new UserRepoController(this.gitHubService, this.request)
         userFiltered.repos = await userRepoController.getOwnRepositories(userFiltered.name)
 
         return userFiltered
