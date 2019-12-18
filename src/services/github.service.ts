@@ -13,25 +13,6 @@ export interface GitHubService {
 }
 
 /**
- * GitHub Error response
- */
-export interface ErrorGetGitHub {
-    message: string
-    documentation_url?: string
-}
-
-//
-export class UserNotFoundError extends Error {
-    code: string
-    entityName: string
-}
-
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-export function isEntityNotFoundError(e: any): boolean {
-    return e instanceof UserNotFoundError
-}
-
-/**
  * A GitHub User
  */
 export interface UserGitHub {
@@ -76,6 +57,21 @@ export class GitHubServiceProvider implements Provider<GitHubService> {
         return getService(this.dataSource)
     }
 }
+
+// could be used for identifying GitHub specific errors,
+// but just GitHubError.message is to general when documentation_url would be missing
+// /**
+//  * GitHub Error response
+//  */
+// export class GitHubError extends Error {
+//     message: string
+//     documentation_url?: string
+// }
+
+// // eslint-disable-next-line @typescript-eslint/no-explicit-any
+// export function isGitHubError(e: any): boolean {
+//     return e instanceof GitHubError
+// }
 
 /**
  * A generic service interface with any number of methods that return a promise.

@@ -25,6 +25,8 @@ export class CustomRejectProvider implements Provider<Reject> {
         let httpError: any = undefined
 
         if (error instanceof HttpErrors.HttpError) {
+            // for security reasons it has to be specified deeper here,
+            // which http errors should be passed through to the API use and which are hidden
             sendResponse = true
             httpError = error
         } else if (error.code == 'ENOTFOUND') {
