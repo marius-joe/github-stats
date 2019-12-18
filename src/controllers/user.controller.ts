@@ -27,11 +27,23 @@ export class UserController {
     })
     async getUserInfo(@param.path.string('username') username: string): Promise<User> {
         let userGH: UserGitHub
+        let errMsg: string
         try {
             userGH = await this.gitHubService.getUser(username)
         } catch (e) {
-            if ('statusCode' in e && e.statusCode == 404) {
-                throw new HttpErrors.NotFound(`GitHub User '${username}' not found`)
+            const errCode = e.statusCode
+            if (errCode in HttpErrors) {
+                switch (errCode) {
+                    case 404: {
+                        errMsg = `GitHub User '${username}' not found`
+                        break
+                    }
+                    default: {
+                        errMsg = e.message
+                        break
+                    }
+                }
+                throw new HttpErrors[errCode](errMsg)
             } else {
                 throw e
             }
