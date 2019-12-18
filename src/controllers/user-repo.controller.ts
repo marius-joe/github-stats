@@ -42,7 +42,7 @@ export class UserRepoController {
 
         try {
             // given header 'Accept: application/xml', the request will be rejected
-            if (reqAcceptType && reqAcceptType.toLowerCase() == 'application/xml') {
+            if (reqAcceptType && reqAcceptType.toLowerCase() === 'application/xml') {
                 throw new HttpErrors.NotAcceptable(
                     `Unsupported response type '${reqAcceptType}' for path: '${reqPath}'`,
                 )
@@ -69,11 +69,11 @@ export class UserRepoController {
             }
         }
 
-        let reposFiltered: Repo[] = []
+        const reposFiltered: Repo[] = []
         for (const repoGH of reposGH) {
             // return only own repositories of the user excluding forks
             if (!repoGH.fork) {
-                let repoFiltered: Repo = new Repo()
+                const repoFiltered: Repo = new Repo()
 
                 repoFiltered.name = repoGH.name
                 repoFiltered.userName = repoGH.owner.login
@@ -81,7 +81,7 @@ export class UserRepoController {
 
                 const branchesGH: BranchGitHub[] = await this.gitHubService.getBranches(username, repoGH.name)
                 for (const branchGH of branchesGH) {
-                    let branchFiltered: Branch = new Branch()
+                    const branchFiltered: Branch = new Branch()
 
                     branchFiltered.name = branchGH.name
                     branchFiltered.lastCommit = { sha: branchGH.commit.sha }

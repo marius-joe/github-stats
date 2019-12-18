@@ -22,6 +22,7 @@ export interface UserGitHub {
     location: string
     bio: string
     public_repos: number
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     [x: string]: any
 }
 
@@ -31,6 +32,7 @@ export interface UserGitHub {
 export interface RepoGitHub {
     name: string
     owner: { login: string }
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     [x: string]: any
 }
 
@@ -40,6 +42,7 @@ export interface RepoGitHub {
 export interface BranchGitHub {
     name: string
     commit: { sha: string }
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     [x: string]: any
 }
 
