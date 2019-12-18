@@ -1,0 +1,147 @@
+openapi: 3.0.0
+info:
+  title: GitHub Stats
+  version: github-stats_1.0
+  description: >
+    A proxy API to retrieve filtered statistics about GitHub users & their repositories
+paths:
+  '/users/{username}':
+    get:
+      description: Returns user and repository information about the specified GitHub user
+      tags:
+        - User
+      responses:
+        '200':
+          description: Information about this GitHub user
+          content:
+            application/json:
+              schema:
+                type: object
+                items:
+                  $ref: '#/components/schemas/User'
+                  definitions:
+                    User:
+                      title: User
+                      properties:
+                        name:
+                          type: string
+                        nameAlias:
+                          type: string
+                        url:
+                          type: string
+                        location:
+                          type: string
+                        bio:
+                          type: string
+                        numPublicRepos:
+                          type: string
+                        repos:
+                          type: array
+                          items:
+                            $ref: '#/components/schemas/Repo'
+                      required:
+                        - name
+                        - nameAlias
+                        - url
+                      additionalProperties: false
+                    Repo:
+                      title: Repo
+                      properties:
+                        name:
+                          type: string
+                        userName:
+                          type: string
+                        branches:
+                          type: array
+                          items:
+                            $ref: '#/components/schemas/Branch'
+                      required:
+                        - name
+                        - userName
+                      additionalProperties: false
+                    Branch:
+                      title: Branch
+                      properties:
+                        name:
+                          type: string
+                        lastCommit:
+                          type: object
+                        repoName:
+                          type: string
+                      required:
+                        - name
+                        - lastCommit
+                      additionalProperties: false
+      parameters:
+        - name: username
+          in: path
+          schema:
+            type: string
+          required: true
+  '/users/{username}/repositories':
+    get:
+      description: Returns a list of the users own repositories, their branches and the last commits
+      tags:
+        - "User Repositories"
+      responses:
+        '200':
+          description: Array of the users own repositories
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Repo'
+      parameters:
+        - name: username
+          in: path
+          schema:
+            type: string
+          required: true
+servers:
+  - url: 'http://localhost:3000'
+components:
+  schemas:
+    User:
+      title: User
+      properties:
+        name:
+          type: string
+        userName:
+          type: string
+        branches:
+          type: array
+          items:
+            $ref: '#/components/schemas/Branch'
+      required:
+        - name
+        - userName
+      additionalProperties: false
+    Repo:
+      title: Repo
+      properties:
+        name:
+          type: string
+        userName:
+          type: string
+        branches:
+          type: array
+          items:
+            $ref: '#/components/schemas/Branch'
+      required:
+        - name
+        - userName
+      additionalProperties: false
+    Branch:
+      title: Branch
+      properties:
+        name:
+          type: string
+        lastCommit:
+          type: object
+        repoName:
+          type: string
+      required:
+        - name
+        - lastCommit
+      additionalProperties: false

@@ -5,7 +5,8 @@
     "options": {
         "headers": {
             "accept": "application/vnd.github.v3+json",
-            "content-type": "application/json"
+            "content-type": "application/json",
+            "user-agent": "github-stats-app"
         }
     },
     "crud": false,
@@ -13,9 +14,10 @@
         {
             "template": {
                 "method": "GET",
-                "url": "/users/{username}",
+                "url": "https://api.github.com/users/{username}",
                 "query": { "type": "owner", "sort": "full_name", "direction": "asc" }
             },
+            "responsePath": "$.results.*",
             "functions": {
                 "getUser": ["username"]
             }
@@ -23,9 +25,10 @@
         {
             "template": {
                 "method": "GET",
-                "url": "/users/{username}/repos",
+                "url": "https://api.github.com/users/{username}/repos",
                 "query": { "type": "owner", "sort": "full_name", "direction": "asc" }
             },
+            "responsePath": "$.results.*",
             "functions": {
                 "getRepositories": ["username"]
             }
@@ -33,9 +36,10 @@
         {
             "template": {
                 "method": "GET",
-                "url": "/repos/{username}/{repository}/branches",
+                "url": "https://api.github.com/repos/{username}/{repository}/branches",
                 "query": { "type": "owner", "sort": "full_name", "direction": "asc" }
             },
+            "responsePath": "$.results.*",
             "functions": {
                 "getBranches": ["username", "repository"]
             }

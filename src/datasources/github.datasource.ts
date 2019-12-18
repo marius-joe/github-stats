@@ -2,6 +2,9 @@ import { inject, lifeCycleObserver, LifeCycleObserver, ValueOrPromise } from '@l
 import { juggler } from '@loopback/repository'
 import * as config from './github.datasource.config.json'
 
+/**
+ * A REST datasource that maps to the GitHub API
+ */
 @lifeCycleObserver('datasource')
 export class GithubDataSource extends juggler.DataSource implements LifeCycleObserver {
     static dataSourceName = 'github'
@@ -17,7 +20,7 @@ export class GithubDataSource extends juggler.DataSource implements LifeCycleObs
      * Start the datasource when application is started
      */
     start(): ValueOrPromise<void> {
-        // Add your logic here to be invoked when the application is started
+        // Addional logic can be inserted here
     }
 
     /**
