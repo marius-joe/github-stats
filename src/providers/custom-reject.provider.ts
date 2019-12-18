@@ -19,18 +19,32 @@ export class CustomRejectProvider implements Provider<Reject> {
      * Custom 'reject' Sequence Action: define own error response structure
      * @param response - The response object used to reply to the client.
      */
-    action({ request, response }: HandlerContext, error: Error) {
+    action({ request, response }: HandlerContext, error: any) {
         response.setHeader('Content-Type', 'application/json')
+        let sendResponse: boolean = false
+        let httpError: any = undefined
+
         if (error instanceof HttpErrors.HttpError) {
-            const httpError = HttpErrors(error)
-            const errCode = httpError.statusCode
-            response.status(errCode).json({
-                status: errCode,
-                message: httpError.message,
-            })
+            sendResponse = true
+            httpError = error
+        } else if (error.code == 'ENOTFOUND') {
+            // in this case the GitHub API was not reachable
+            sendResponse = true
+            httpError = new HttpErrors.GatewayTimeout(`GitHub is not reachable, please try again later`)
+        }
+
+        if (sendResponse) {
+            let errCode: number = httpError.statusCode
+            let errMsg: string = httpError.message
+            response.status(errCode).json(this.generateResponseObj(errCode, errMsg))
             response.end()
-        } else {
-            response.end()
+        }
+    }
+
+    generateResponseObj(errCode: number, errMsg: string): object {
+        return {
+            status: errCode,
+            message: errMsg,
         }
     }
 }
