@@ -14,6 +14,6 @@ Currently the API provides following features:
 -   list filtered information about a GitHub user's own repositories using a custom REST datasource + service
 -   error handling when the user cannot be found via parsing GitHub errors and configuring a custom 'reject' Sequence Action
 -   error handling when the GitHub API is not reachable
--   **_error handling for unsupported header values in an incoming request [in progress]_**
+-   error handling for unsupported header values in an incoming request
 
 The application can be started via a docker container and using this a deployment to [Google Cloud Run](https://github.com/ahmetb/cloud-run-faq) is triggered on every 'push' to the branches 'master' and 'dev' via configured [GitHub Actions](https://help.github.com/en/actions/automating-your-workflow-with-github-actions): [My Workflows](https://github.com/marius-joe/github-stats/tree/feat/github-unknown-user/.github/workflows)
