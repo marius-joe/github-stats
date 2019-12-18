@@ -1,12 +1,12 @@
 import { BootMixin } from '@loopback/boot'
 import { ApplicationConfig } from '@loopback/core'
-import { RestExplorerBindings, RestExplorerComponent } from '@loopback/rest-explorer'
 import { RepositoryMixin } from '@loopback/repository'
 import { RestApplication, RestServer, RestBindings } from '@loopback/rest'
 import { ServiceMixin } from '@loopback/service-proxy'
-import * as path from 'path'
 import { MySequence } from './sequence'
 import { CustomRejectProvider } from './providers/custom-reject.provider'
+//import * as path from 'path'
+//import { RestExplorerBindings, RestExplorerComponent } from '@loopback/rest-explorer'
 
 // Configure mixin class to prevent errors when a service or repository should be registered automatically via a provider
 // e.g. : "app.serviceProvider() function is needed for ServiceBooter"
